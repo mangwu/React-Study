@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="ch-zn">
+	<head>
+		<meta charset="utf-8">
+		<meta name="view-port" content="width=device-width">
+		<meta name="author" content="mangwu">
+		<title>在HTML中添加React</title>
+		<style>
+			body {
+				font-family: "微软雅黑";
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 其他HTML -->
+		<h1>Hello, World!</h1>
+		<!-- 空的div标签标记想要使用React显示内容的位置 -->
+		<div id="react_root"></div>
+
+		<!-- 复用React组件，并向组件传递信息 -->
+		<p>
+			This is first comment.
+			<div class="like_button_container" data-commentid="1"></div>
+		</p>
+		<p>
+			This is second comment.
+			<div class="like_button_container" data-commentid="2"></div>
+		</p>
+		<p>
+			This is third comment.
+			<div class="like_button_container" data-commentid="3"></div>
+		</p>
+
+		<!-- 其他HTML -->
+		<h3>END</h3>
+
+		<!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
+		<script type="text/javascript" src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+		<script type="text/javascript" src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+
+		<!-- 加载react组件 -->
+		<script type="text/javascript" src="react.min.js"></script>
+
+	</body>
+</html>
