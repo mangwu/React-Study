@@ -28,7 +28,26 @@ class Board extends React.Component {
     super(props);
     this.state = {
       squares: Array(9).fill(null),
+      xIsNext: true,
+      winner: null,
     };
+  }
+  handleClick(i) {
+    // 棋局结束？
+    if (winner) return;
+    // 获取副本
+    const squares = this.state.squares.slice() 
+    // 是否落子
+    if (!squares[i]) {
+      // 设置状态
+      squares[i] = this.state.xIsNext ? "X" : "O";
+      const winner = caculateWinner(squares);
+      this.setState({
+        squares: squares,
+        xIsNext: !this.state.xIsNext,
+        winner: winner,
+      })
+    }
   }
   renderSquare(i) {
     return (
@@ -39,7 +58,10 @@ class Board extends React.Component {
     );
   }
   render() {
-    const status = "Next palyer: X";
+    let status = "Next palyer: X";
+    if (this.state.winner) {
+      status = "Winner: " + this.state.winner;  
+    }
 
     return (
       <div>
@@ -79,3 +101,27 @@ class Game extends React.Component {
     );
   }
 }
+function caculateWinner(squares) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [0, 4, 8],
+    [1, 4, 7],
+    [2, 4, 6],
+    [2, 5, 8],
+  ];
+
+  for (let line of lines) {
+    const [a, b, c] = line
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+    return null;
+  }
+}
+
+
+
+ReactDOM.render(<Game />, document.getElementById("root"));
