@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .Avater {
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="root2"></div>
+    <div id="root3"></div>
+
+    <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <!-- 加载JSXbabel包 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+      // 两种组件，函数组件和类组件
+      const root = document.querySelector("#root");
+      function Welcome(props) {
+        return <h1>Hello, {props.name}</h1>;
+      }
+      ReactDOM.render(<Welcome className="welcome" name="mangwu" />, root);
+
+      class WelcomeCopy extends React.Component {
+        render() {
+          return <h1>Hello, {this.props.name}</h1>;
+        }
+      }
+
+      ReactDOM.render(
+        <WelcomeCopy className="welcome" name="mangwu" />,
+        document.querySelector("#root2")
+      );
+
+      // 组合组件
+      function App() {
+        return (
+          <div className="app">
+            <div>
+              {((i) => {
+                return Array(i)
+                  .fill("mangwu")
+                  .map((value, index) => {
+                    return <Welcome name={value + index} key={index} />;
+                  });
+              })(5)}
+            </div>
+            <Welcome name="Sara" />
+            <Welcome name="Mangwu" />
+            <Welcome name="Jack" />
+          </div>
+        );
+      }
+      ReactDOM.render(<App />, root2);
+
+      // 拆分组件
+
+      const commentInfo = {
+        author: {
+          name: "mangwu",
+          avatarURL: "https://github.githubassets.com/pinned-octocat.svg",
+        },
+        text: "Hello, Component",
+        date: new Date()
+      }
+      function formatDate(date) {
+        return date.toLocaleTimeString();
+      }
+      function Avatar(props) {
+        return (
+          <img
+            className="Avater"
+            src={props.user.avatarURL}
+            alt={props.user.name}
+          />
+        );
+      }
+      function UserInfoName(props) {
+        return <div className="UserInfo-name">{props.user.name}</div>;
+      }
+      function CommentText(props) {
+        return <div className="Comment-text">{props.text}</div>;
+      }
+      function CommentDate(props) {
+        return <div className="Comment-date">{formatDate(props.date)}</div>;
+      }
+      function UserInfo(props) {
+        return (
+          <div className="UserInfo">
+            <Avatar user={props.user} />
+            <UserInfoName user={props.user} />
+          </div>
+        );
+      }
+
+      function Comment(props) {
+        return (
+          <div className="Comment">
+            <UserInfo user={props.commentInfo.author} />
+            <CommentText text={props.commentInfo.text} />
+            <CommentDate date={props.commentInfo.date} />
+          </div>
+        );
+      }
+
+      ReactDOM.render(
+        <Comment commentInfo={commentInfo} />,
+        document.querySelector("#root3")
+      )
+    </script>
+    <script>
+      // class Clock extends React.Component {
+      //   constructor(props) {
+      //     super(props);
+      //     this.state = {
+      //       date: new Date(),
+      //       timer: null,
+      //     };
+      //   }
+      //   componentDidMount() {
+      //     this.setState({
+      //       timer: setInterval(() => {
+      //         this.setState({
+      //           date: new Date()
+      //         })
+      //       }, 1000),
+      //     });
+      //   }
+      //   componentWillUnmount() {
+      //     clearInterval(this.timer)
+      //   }
+      //   render() {
+      //     return (
+      //       <div>
+      //         <h1>Hello, state</h1>
+      //         <h2>It is {this.state.date.toLocaleTimeString()}</h2>
+      //       </div>
+      //     );
+      //   }
+      // }
+    </script>
+  </body>
+</html>
