@@ -59,9 +59,9 @@
         render() {
           return (
             <div>
-              <button onClick={() => this.props.onClick()}>＋</button> 
+              <button onClick={() => this.props.onClick()}>{this.props.value}</button>
             </div>
-          )
+          );
         }
       }
 
@@ -70,29 +70,39 @@
           super(props);
           this.state = {
             counter: 0,
-          }
+          };
         }
         add() {
           this.setState((state, props) => ({
-            counter: state.counter + props.increment
+            counter: state.counter + props.increment,
+          }));
+        }
+        sub() {
+          this.setState((state, props) => ({
+            counter: state.counter - props.decrement,
           }))
         }
         render() {
           return (
-            <div> 
+            <div>
               <h2 className="number">{this.state.counter}</h2>
-              <Button onClick={() => this.add()} increment={this.props.increment}/>  
+              <Button
+                onClick={() => this.add()}
+                value="+"
+              />
+              <Button
+                onClick={() => this.sub()}
+                value="-"
+              />
             </div>
-          )
+          );
         }
       }
 
       ReactDOM.render(
-        <Counter increment={2} />,
+        <Counter increment={2} decrement={2}/>,
         document.querySelector("#root2")
-      )
-
-
+      );
     </script>
   </body>
 </html>

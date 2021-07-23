@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      button {
+        height: 30px;
+        width: 100px;
+        border: none;
+        color: white;
+        font-size: 20px;
+        border-radius: 5px;
+      }
+      .on {
+        background-color: rgb(0, 140, 255);
+      }
+      .off {
+        background-color: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="root2"></div>
+    <a
+      href="https://www.baidu.com/"
+      onclick="console.log('the link was clicked.');return false;"
+      >link</a
+    >
+    <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <!-- 加载JSXbabel包 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+      // 与原生DOM的事件在中断事件上有区别
+      class Link extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            URL: "https://www.baidu.com/",
+          };
+        }
+        handleClick(e) {
+          e.preventDefault();
+          console.log("The link was clicked.");
+        }
+        render() {
+          return (
+            <a
+              className="baidu"
+              href={this.state.URL}
+              onClick={this.handleClick}
+            >
+              react link{" "}
+            </a>
+          );
+        }
+      }
+      ReactDOM.render(<Link />, document.querySelector("#root"));
+
+      // 开关
+      class Toggle extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            isToggleOn: true,
+          };
+
+          // 绑定事件方法的this
+          this.handleClick = this.handleClick.bind(this);
+        }
+        handleClick() {
+          // 所有通过状态本身改变状态的setState都需要使用箭头函数进行避免setState异步造成的困扰
+          this.setState((state) => ({
+            isToggleOn: !state.isToggleOn,
+          }));
+        }
+        render() {
+          return (
+            <button
+              onClick={this.handleClick}
+              className={this.state.isToggleOn ? "on" : "off"}
+            >
+              {this.state.isToggleOn ? "On" : "Off"}
+            </button>
+          );
+        }
+      }
+      ReactDOM.render(
+        <Toggle />,
+        document.querySelector("#root2")
+      )
+    </script>
+  </body>
+</html>

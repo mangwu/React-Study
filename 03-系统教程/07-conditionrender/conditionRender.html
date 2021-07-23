@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      button {
+        height: 30px;
+        width: 100px;
+        border: none;
+        color: white;
+        font-size: 20px;
+        border-radius: 5px;
+      }
+      .in {
+        background-color: rgb(0, 140, 255);
+      }
+      .out {
+        background-color: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <!-- 加载JSXbabel包 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+      // 条件渲染
+      function UserGreeting(props) {
+        return <h1>Welcome back!</h1>;
+      }
+      function GuestGreeting(props) {
+        return <h1>Please sign up. </h1>;
+      }
+
+      class Button extends React.Component {
+        constructor(props) {
+          super(props);
+        }
+        render() {
+          return (
+            <button
+              className={this.props.isLoggedIn ? "log out" : "log in"}
+              onClick={() => this.props.onClick()}
+            >
+              {this.props.isLoggedIn ? "log out" : "log in"}
+            </button>
+          );
+        }
+      }
+      class Greeting extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            isLoggedIn: false,
+          };
+          this.handleClick = this.handleClick.bind(this);
+        }
+        handleClick() {
+          this.setState((state) => ({
+            isLoggedIn: !state.isLoggedIn,
+          }));
+        }
+        render() {
+          let greeting = this.state.isLoggedIn ? <UserGreeting /> : <GuestGreeting />
+          return (
+              <div className="greeting">
+                {greeting}
+                <Button
+                  isLoggedIn={this.state.isLoggedIn}
+                  onClick={this.handleClick}
+                />
+              </div>
+            );
+        }
+      }
+      ReactDOM.render(<Greeting />, document.querySelector("#root"));
+    </script>
+  </body>
+</html>
