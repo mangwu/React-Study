@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <!-- 加载JSXbabel包 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+      // 组件管理表单元素状态
+      class NameForm extends React.Component {
+        constructor(props) {
+          super(props);
+          // 用state保存表单元素的状态
+          this.state = {
+            nameValue: "",
+          };
+          // 绑定this
+          this.handleChange = this.handleChange.bind(this);
+          this.handleSubmit = this.handleSubmit.bind(this);
+        }
+        // 处理input的内容变化，实时更新到state中
+        handleChange(event) {
+          this.setState({ nameValue: event.target.value });
+        }
+        // 提交动作交给React组件，使表单元素完全由组件控制
+        handleSubmit(event) {
+          const result = document.querySelector(".name-form+.result");
+          result.textContent = this.state.nameValue;
+          // 阻止默认提交行为
+          event.preventDefault();
+        }
+
+        render() {
+          return (
+            <div className="react-form">
+              <form className="name-form" onSubmit={this.handleSubmit}>
+                <label htmlFor="name">name:</label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  value={this.state.nameValue}
+                  onChange={this.handleChange}
+                />
+                <input type="submit" value="提交"/>
+              </form>
+              <div className="result">
+              </div>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(
+        <NameForm />,
+        document.querySelector("#root")
+      )
+    </script>
+  </body>
+</html>

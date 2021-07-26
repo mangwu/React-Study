@@ -24,6 +24,7 @@
   </head>
   <body>
     <div id="root"></div>
+    <div id="root2"></div>
     <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
     <script
       crossorigin
@@ -86,6 +87,25 @@
         }
       }
       ReactDOM.render(<Greeting />, document.querySelector("#root"));
+
+      // 与运算符
+      function Mailbox(props) {
+        const unreadMessages = props.unreadMessages;
+        return (
+          <div className="mailbox">
+            <h1>mailbox</h1>
+            {
+              unreadMessages.length > 0 &&
+              <h2>You have {unreadMessages.length} unread Messages.</h2>
+            }
+          </div>
+        )
+      }
+      const messages = ["React", "Re:"];
+      ReactDOM.render(
+        <Mailbox unreadMessages={messages} />,
+        document.querySelector("#root2")
+      )
     </script>
   </body>
 </html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="root2"></div>
+    <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <!-- 加载JSXbabel包 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+      // 渲染多个组件
+      const numbers = [1, 2, 3, 4];
+      const listItems = numbers.map((v, i) => {
+        return <li key={i}>{v}</li>;
+      });
+
+      ReactDOM.render(<ul>{listItems}</ul>, document.querySelector("#root"));
+
+      // key作用域
+      class Blog extends React.Component {
+        render() {
+          const siderbar = (
+            <ul>
+              {this.props.posts.map((post) => (
+                <li key={post.id}>{post.title}</li>
+              ))}
+            </ul>
+          );
+
+          const content = this.props.posts.map((post) => (
+            <div key={post.id}>
+              <h3>{post.title}</h3>
+              <p>{post.content}</p>
+            </div>
+          ));
+          return (
+            <div>
+              {siderbar}
+              <hr />
+              {content}
+            </div>
+          );
+        }
+      }
+      const posts =[
+        {
+          id: 1,
+          title: "React",
+          content: "React is powerful construture for front-end."
+        },
+        {
+          id: 2,
+          title: "installation",
+          content: "You can install React from npm."
+        }
+      ]
+      ReactDOM.render(
+        <Blog posts={posts}/>,
+        document.querySelector("#root2")
+      )
+    </script>
+  </body>
+</html>
