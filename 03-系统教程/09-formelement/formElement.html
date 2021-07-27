@@ -8,6 +8,9 @@
   </head>
   <body>
     <div id="root"></div>
+    <div id="root2"></div>
+    <div id="root3"></div>
+    <div id="root4"></div>
     <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
     <script
       crossorigin
@@ -57,18 +60,181 @@
                   value={this.state.nameValue}
                   onChange={this.handleChange}
                 />
-                <input type="submit" value="提交"/>
+                <input type="submit" value="提交" />
               </form>
-              <div className="result">
-              </div>
+              <div className="result"></div>
             </div>
           );
         }
       }
-      ReactDOM.render(
-        <NameForm />,
-        document.querySelector("#root")
-      )
+      ReactDOM.render(<NameForm />, document.querySelector("#root"));
+
+      // textarea Form
+      class TextareaForm extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            textareaValue: "请输入内容",
+          };
+          this.handleTextareaChange = this.handleTextareaChange.bind(this);
+          this.handleTextareaSubmit = this.handleTextareaSubmit.bind(this);
+        }
+        handleTextareaChange(event) {
+          this.setState({ textareaValue: event.target.value });
+        }
+        handleTextareaSubmit(event) {
+          const result = document.querySelector(".textarea-form+.result");
+          result.textContent = this.state.textareaValue;
+          event.preventDefault();
+        }
+        render() {
+          return (
+            <div className="react-form">
+              <form
+                className="textarea-form"
+                onSubmit={this.handleTextareaSubmit}
+              >
+                <label htmlFor="article">article</label>
+                <textarea
+                  value={this.state.textareaValue}
+                  onChange={this.handleTextareaChange}
+                  name="article"
+                  id="article"
+                />
+                <input type="submit" value="提交" />
+              </form>
+              <div className="result"></div>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<TextareaForm />, document.querySelector("#root2"));
+
+      // select标签
+      class SelectForm extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            selectValue: ["mango"],
+          };
+          this.handleSelectChange = this.handleSelectChange.bind(this);
+          this.handleSelectSubmit = this.handleSelectSubmit.bind(this);
+        }
+
+        handleSelectChange(event) {
+          this.setState({ selectValue: event.target.value });
+        }
+
+        handleSelectSubmit(event) {
+          const result = document.querySelector(".select-form+.result");
+          console.log(this.state.selectValue);
+          result.textContent = "喜欢的水果：" + this.state.selectValue;
+          event.preventDefault();
+        }
+
+        render() {
+          return (
+            <div className="react-form">
+              <form className="select-form" onSubmit={this.handleSelectSubmit}>
+                <label htmlFor="fruits">水果</label>
+                <select
+                  multiple={true}
+                  value={this.state.selectValue}
+                  onChange={this.handleSelectChange}
+                  name="fruits"
+                  id="fruits"
+                  size={2}
+                >
+                  <option value="mango">芒果</option>
+                  <option value="apple">苹果</option>
+                  <option value="coconut">椰子</option>
+                </select>
+                <input type="submit" value="提交" />
+              </form>
+              <div className="result"></div>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<SelectForm />, document.querySelector("#root3"));
+
+      // 多个input
+      class MultipleForm extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            checkValue: false,
+            numberValue: 0,
+            textValue: "内容",
+          };
+          this.handleInputChange = this.handleInputChange.bind(this);
+          this.handleInputSubmit = this.handleInputSubmit.bind(this);
+        }
+        handleInputChange(event) {
+          const target = event.target;
+          const name = target.name;
+          let value;
+          console.log(name);
+          switch (name) {
+            case "checkValue":
+              value = (target.checked === "on") ? true : false;
+            case "numberValue":
+              value = parseInt(target.value);
+            case "textValue":
+              value = target.value;
+          }
+          console.log(value);
+          this.setState({
+            [name]: value,
+          });
+        }
+        handleInputSubmit(event) {
+          const result = document.querySelector(".multiple-form+.result");
+          result.textContent = `
+          点击确认：${this.state.checkValue}
+          确认数量；${this.state.numberValue}
+          备注:${this.state.textValue}
+          `;
+          event.preventDefault();
+        }
+        render() {
+          return (
+            <div className="react-form">
+              <form className="multiple-form" onSubmit={this.handleInputSubmit}>
+                <label htmlFor="checkValue">确认</label>
+                <input
+                  type="checkbox"
+                  name="checkValue"
+                  id="checkValue"
+                  checked={this.state.checkValue}
+                  onChange={this.handleInputChange}
+                />
+                <label htmlFor="number">数量</label>
+                <input
+                  type="number"
+                  name="numberValue"
+                  id="number"
+                  value={this.state.numberValue}
+                  onChange={this.handleInputChange}
+                />
+                <label htmlFor="text">备注</label>
+                <input
+                  type="text"
+                  name="textValue"
+                  id="text"
+                  value={this.state.textValue}
+                  onChange={this.handleInputChange}
+                />
+                <input type="submit" value="提交" />
+              </form>
+              <div className="result"></div>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<MultipleForm />, document.querySelector("#root4"));
+
+      ReactDOM.render(<input value="1" />, document.querySelector("#root"));
     </script>
   </body>
 </html>
