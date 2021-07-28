@@ -9,6 +9,7 @@
   <body>
     <div id="root"></div>
     <div id="root2"></div>
+    <div id="root3"></div>
     <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
     <script
       crossorigin
@@ -29,17 +30,18 @@
           <div className={"fancy-box " + props.color}>{props.children}</div>
         );
       }
-      function Dialog() {
+      function Dialog(props) {
         return (
           <FancyBox color="blue">
-            <h1 className="title">Welcome</h1>
-            <p className="dialog-message">
-              Thank you for visiting our spacecreaft!
-            </p>
+            <h1 className="title">{props.title}</h1>
+            <p className="dialog-message">{props.message}</p>
           </FancyBox>
         );
       }
-      ReactDOM.render(<Dialog />, root);
+      ReactDOM.render(
+        <Dialog title="welcome" message="React is a powerful constructure" />,
+        root
+      );
       // 传递组件对象
       function SplitPane(props) {
         return (
@@ -58,6 +60,62 @@
         );
       }
       ReactDOM.render(<App />, document.querySelector("#root2"));
+
+      // 特例关系
+      function WelcomeDialog() {
+        // WelcomeDialog 是 Dialog 的特殊实例
+        return (
+          <Dialog title="welcome" message="React is a powerful constructure" />
+        );
+      }
+
+      function Sign(props) {
+        return (
+          <div className="sign">
+            <h1 className="sign-title">{props.title}</h1>
+            <div className="sign-logo">{props.logo}</div>
+            {props.children}
+          </div>
+        );
+      }
+      class SignUp extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            loginValue: "",
+            result: "",
+          };
+          this.handleChange = this.handleChange.bind(this);
+          this.handleClick = this.handleClick.bind(this);
+        }
+        handleChange(e) {
+          this.setState({
+            loginValue: e.target.value,
+          });
+          
+        }
+        handleClick() {
+          this.setState((state) => ({
+            result: "Welcome " + state.loginValue + "!",
+          }));
+        }
+        render() {
+          return (
+            <Sign title="React Mars Exploration Program" logo="./logo.svg">
+              <input
+                type="text"
+                name="signup"
+                id="signup"
+                value={this.state.loginValue}
+                onChange={this.handleChange}
+              />
+              <button onClick={this.handleClick}>Sign Up</button>
+              <p className="signresult">{this.state.result}</p>
+            </Sign>
+          );
+        }
+      }
+      ReactDOM.render(<SignUp />, document.querySelector("#root3"))
     </script>
   </body>
 </html>
