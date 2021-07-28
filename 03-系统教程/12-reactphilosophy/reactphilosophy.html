@@ -85,11 +85,24 @@
       }
       class ProductTable extends React.Component {
         render() {
+          // 接受父组件的状态
+          const filterText = this.props.filterText;
+          const isStockedOnly = this.props.isStockedOnly;
           // 保存每一行的组件
           const rows = [];
           // 比较类别
           let lastCategory = null;
+          // 筛选展示产品
           this.props.products.forEach((product) => {
+            // 如果产品名称不包含搜索关键词就过滤掉
+            console.log(filterText);
+            if (product.name.indexOf(filterText) === -1) {
+              return;
+            }
+            // 如果需要stocked的产品，但是产品不是stocked，直接过滤
+            if (isStockedOnly && !product.stocked) {
+              return;
+            }
             if (product.category !== lastCategory) {
               rows.push(
                 <ProductCategoryRow
@@ -117,6 +130,8 @@
 
       class SearchBar extends React.Component {
         render() {
+          const filterText = this.props.filterText;
+          const isStockedOnly = this.props.isStockedOnly;
           return (
             <div className="search-bar">
               <input
@@ -124,7 +139,7 @@
                 name="search"
                 id="search"
                 placeholder="Search..."
-                value={this.props.searchValue}
+                value={filterText}
                 onChange={this.props.onSearchChange}
               />
               <br />
@@ -132,7 +147,7 @@
                 type="checkbox"
                 name="stocked"
                 id="stocked"
-                checked={this.props.checked}
+                checked={isStockedOnly}
                 onChange={this.props.onCheckChange}
               />
               Only show product in stock
@@ -140,18 +155,32 @@
           );
         }
       }
-      class FilerableProductTable extends React.Component {
+      class FilterableProductTable extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            filterText: "ball",
+            isStockedOnly: false,
+          };
+        }
         render() {
           return (
-            <div className="filerable-product-table">
-              <SearchBar />
-              <ProductTable products={this.props.products} />
+            <div className="filterable-product-table">
+              <SearchBar
+                filterText={this.state.filterText}
+                isStockedOnly={this.state.isStockedOnly}
+              />
+              <ProductTable
+                products={this.props.products}
+                filterText={this.state.filterText}
+                isStockedOnly={this.state.isStockedOnly}
+              />
             </div>
           );
         }
       }
       ReactDOM.render(
-        <FilerableProductTable products={products} />,
+        <FilterableProductTable products={products} />,
         document.querySelector("#root")
       );
     </script>
