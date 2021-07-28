@@ -95,7 +95,7 @@
           // 筛选展示产品
           this.props.products.forEach((product) => {
             // 如果产品名称不包含搜索关键词就过滤掉
-            console.log(filterText);
+            // console.log(filterText);
             if (product.name.indexOf(filterText) === -1) {
               return;
             }
@@ -129,18 +129,33 @@
       }
 
       class SearchBar extends React.Component {
+        constructor(props) {
+          super(props);
+          this.handleFilterInputChange =
+            this.handleFilterInputChange.bind(this);
+          this.handleStockedCheckboxClick =
+            this.handleStockedCheckboxClick.bind(this);
+        }
+        handleFilterInputChange(e) {
+          this.props.onFilterInputChange(e.target.value);
+        }
+        handleStockedCheckboxClick(e) {
+          this.props.onStockedCheckboxClick(e.target.checked);
+        }
         render() {
           const filterText = this.props.filterText;
+          // console.log(filterText);
           const isStockedOnly = this.props.isStockedOnly;
+          console.log(isStockedOnly);
           return (
             <div className="search-bar">
               <input
-                type="search"
+                type="text"
                 name="search"
                 id="search"
                 placeholder="Search..."
                 value={filterText}
-                onChange={this.props.onSearchChange}
+                onChange={this.handleFilterInputChange}
               />
               <br />
               <input
@@ -148,7 +163,7 @@
                 name="stocked"
                 id="stocked"
                 checked={isStockedOnly}
-                onChange={this.props.onCheckChange}
+                onChange={this.handleStockedCheckboxClick}
               />
               Only show product in stock
             </div>
@@ -159,9 +174,26 @@
         constructor(props) {
           super(props);
           this.state = {
-            filterText: "ball",
+            filterText: "",
             isStockedOnly: false,
           };
+          this.handleFilterInputChange =
+            this.handleFilterInputChange.bind(this);
+          this.handleStockedCheckboxClick =
+            this.handleStockedCheckboxClick.bind(this);
+        }
+        handleFilterInputChange(filterText) {
+          this.setState({
+            filterText: filterText,
+          });
+          // 异步的，打印为空
+          // console.log(this.state.filterText);
+        }
+        handleStockedCheckboxClick(isStockedOnly) {
+          this.setState({
+            isStockedOnly: isStockedOnly,
+          });
+          // console.log(this.state.isStockedOnly);
         }
         render() {
           return (
@@ -169,6 +201,8 @@
               <SearchBar
                 filterText={this.state.filterText}
                 isStockedOnly={this.state.isStockedOnly}
+                onFilterInputChange={this.handleFilterInputChange}
+                onStockedCheckboxClick={this.handleStockedCheckboxClick}
               />
               <ProductTable
                 products={this.props.products}
