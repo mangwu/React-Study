@@ -27,10 +27,10 @@ function FormInput() {
   const [textValue, setTextValue] = useState("");
   const [checked, setChecked] = useState(false);
   function handleInputChange(e) {
-    setTextValue(e.target.value)
+    setTextValue(e.target.value);
   }
   function handleCheckboxChange(e) {
-    setChecked(e.target.checked)
+    setChecked(e.target.checked);
   }
   return e(
     "div",
@@ -99,7 +99,6 @@ ReactDOM.render(e(EffectExample), document.querySelector("#root3"));
 // useEffect 的返回清楚副作用的函数
 
 function Clock() {
-
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
@@ -107,20 +106,15 @@ function Clock() {
       setDate(new Date());
     }, 1000);
     return () => {
-      clearInterval(interval) 
-    }
+      clearInterval(interval);
+    };
   });
 
   function formatTime(date) {
     return date.toLocaleTimeString();
-  };
+  }
 
-  return e(
-    "div",
-    null,
-    "the time is ",
-    formatTime(date)
-  )
+  return e("div", null, "the time is ", formatTime(date));
 }
 
 ReactDOM.render(e(Clock), document.querySelector("#root4"));
@@ -129,20 +123,25 @@ ReactDOM.render(e(Clock), document.querySelector("#root4"));
 function useWinSize() {
   const [size, setSize] = useState({
     width: document.documentElement.clientWidth,
-    height: document.documentElement.clientHeight
-  })
+    height: document.documentElement.clientHeight,
+  });
   const onResize = useCallback(() => {
     setSize({
       width: document.documentElement.clientWidth,
-      height: document.documentElement.clientHeight
-    })
-  }, [])
+      height: document.documentElement.clientHeight,
+    });
+  }, []);
   useEffect(() => {
-    window.addEventListener('resize', onResize)
+    window.addEventListener("resize", onResize);
     return () => {
-      window.removeEventListener('resize', onResize)
-    }
-  }, [])
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
   return size;
 }
 
+function WinSize() {
+  const size = useWinSize();
+  return e("div", null, "页面尺寸(宽×高)：", size.width, "×", size.height);
+}
+ReactDOM.render(e(WinSize), document.querySelector("#root5"));
