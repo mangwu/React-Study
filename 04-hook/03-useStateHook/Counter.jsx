@@ -1,5 +1,5 @@
 // import React, { useState } from 'react';
-
+const { useState } = window.React;
 class Counter extends React.Component {
   constructor(props) {
     super(props);
@@ -22,5 +22,20 @@ class Counter extends React.Component {
     );
   }
 }
-ReactDOM.render(<Counter />, document.querySelector("#root"))
 
+function CounterFunc() {
+  const [counter, setCounter] = useState(0);
+  function handleClick() {
+    setCounter(counter + 1);
+  }
+
+  return (
+    <div>
+      <div>function component : You click {counter} times</div>
+      <button onClick={handleClick}>click + 1</button>
+    </div>
+  );
+}
+
+ReactDOM.render(<CounterFunc />, document.querySelector("#root2"));
+ReactDOM.render(<Counter />, document.querySelector("#root"));
