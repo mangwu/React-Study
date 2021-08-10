@@ -12,7 +12,7 @@ function Counter() {
     // return () => {
     //   cleanup
     // };
-  });
+  }, [counter]);
 
   function handleClick() {
     setCounter((counter) => {
