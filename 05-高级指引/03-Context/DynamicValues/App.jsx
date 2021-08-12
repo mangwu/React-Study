@@ -22,7 +22,10 @@ class App extends React.Component {
         </ThemeContext.Provider>
         <hr />
         <section>
-          <ThemeButton label={themes.dark.background} />
+          <ThemeButton
+            label={themes.dark.background}
+            onClick={this.handleThemeChange}
+          />
         </section>
       </div>
     );
