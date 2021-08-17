@@ -31,7 +31,6 @@ function storageReducer(state, action) {
     // book
     case "addBook":
       const book = action.payload;
-      console.log(book);
       return {
         ...state,
         books: {
@@ -41,7 +40,7 @@ function storageReducer(state, action) {
         },
       };
     case "addEDevice":
-      const { eDevice } = action.payload;
+      const eDevice = action.payload;
       return {
         ...state,
         eDevice: {
@@ -72,21 +71,21 @@ function StorageTable() {
     setName(e.target.value);
   };
   const handleOwnerChange = (e) => {
-    setOwner(e.target.owner);
+    setOwner(e.target.value);
   };
   const handleRadioChange = (e) => {
     setRadio(e.target.value);
-    console.log(radio);
   };
   const addItem = (e) => {
     e.preventDefault();
+    const type = radio;
+    const payload =
+      type === "addBook"
+        ? { bookId: id, bookName: name, bookAuthor: owner }
+        : { eDeviceId: id, eDeviceName: name, eDeviceCompany: owner };
     dispatch({
-      type: "addBook",
-      payload: {
-        bookId: "",
-        bookName: "JavaScript高级程序设计",
-        bookAuthor: "Nicholas Zaka",
-      },
+      type,
+      payload,
     });
   };
   const eDeviceTable = Array(state.eDevice.number)
@@ -138,6 +137,7 @@ function StorageTable() {
           value="addBook"
           name="add"
         />
+        <br />
         <label htmlFor="e-device">e-device</label>
         <input
           type="radio"
@@ -146,6 +146,7 @@ function StorageTable() {
           value="addEDevice"
           name="add"
         />
+        <br />
         <label htmlFor="id">ID</label>
         <input type="text" value={id} id="id" onChange={handleIdChange} />
         <br />
