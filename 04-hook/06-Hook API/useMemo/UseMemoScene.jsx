@@ -1,12 +1,12 @@
 const { useState, useMemo } = window.React;
-function TestUseMemo() {
-  const [count, setCount] = useState(0);
+function TestWithoutMemo() {
+  const [count, setCount] = useState(1);
   const [val, setVal] = useState("");
 
   function Expensive() {
     console.log("expensive");
     let sum = 0;
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 1; i <= count; i++) {
       sum = sum + i;
     }
     return sum;
@@ -37,4 +37,4 @@ function TestUseMemo() {
   );
 }
 
-ReactDOM.render(<TestUseMemo />, document.querySelector("#root"));
+ReactDOM.render(<TestWithoutMemo />, document.querySelector("#root"));
