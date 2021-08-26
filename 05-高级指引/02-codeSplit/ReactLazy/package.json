@@ -1,0 +1,14 @@
+{
+  "name": "reactlazy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ReactLazy.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3"
+  }
+}
