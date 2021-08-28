@@ -8,6 +8,7 @@
 </head>
 <body>
   <div id="root"></div>
+  <div id="root2"></div>
   <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
   <script
   crossorigin
@@ -17,9 +18,9 @@
   crossorigin
   src='https://unpkg.com/react-dom@16/umd/react-dom.development.js'
   ></script>
-  <script src="https://gist.github.com/gaearon/1a018a023347fe1c2476073330cc5509.js"></script>
   <!-- 加载JSXbabel包 -->
-  <script src='https://unpkg.com/babel-standalone@6/babel.min.js'></script>
-  <script src="./AccessDOM.jsx" type="text/babel"></script>
+  <script src='https://unpkg.com/babel-standalone@6.26.0/babel.js'></script>
+  <script src="./Comment.js" type="text/babel"></script>
+  <script src="./CommentList.jsx" type="text/babel"></script>
 </body>
 </html>

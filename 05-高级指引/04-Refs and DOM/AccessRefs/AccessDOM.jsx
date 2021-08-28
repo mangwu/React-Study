@@ -10,6 +10,7 @@ class App extends React.Component {
   focusTextInput() {
     // 使用原生的focus方法聚焦
     this.textInputRef.current.focus();
+    console.log(this.textInputRef.current);
   }
   handleClick() {
     const node = this.textInputRef.current;
