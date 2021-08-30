@@ -8,7 +8,7 @@ const shuffle = (arr) => {
 };
 function withSubscribe(WrappedComponent, Datasource) {
   // 返回另外一个组件
-  return class extends React.Component {
+  class WithSubscribe extends React.Component {
     constructor(props) {
       super(props);
       this.handleChange = this.handleChange.bind(this);
@@ -43,7 +43,10 @@ function withSubscribe(WrappedComponent, Datasource) {
         </div>
       );
     }
-  };
+  }
+  // 修改显示名称
+  WithSubscribe.displayName =  `WithSubscribe(${WrappedComponent.name})`
+  return WithSubscribe;
 }
 
 let postsData = [

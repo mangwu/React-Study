@@ -5,9 +5,6 @@ function CommentList(props) {
   return <div>{commentsEle}</div>;
 }
 
-const WithSubscribeCommentList = withSubscribe(
-  CommentList,
-  commentData
-);
+const WithSubscribeCommentList = withSubscribe(CommentList, commentData);
 
 ReactDOM.render(<WithSubscribeCommentList />, document.querySelector("#root"));
