@@ -1,19 +1,26 @@
 /**
  * 结合高阶组件使用refs转发，获取高阶组件中的原始组件的ref
+ * ref传递：TextInputWithLogProps -> WithLogProps -> WrappedComponent(TextInput) -> input[text]  
  */
 const inputRef = React.createRef();
-const TextInput = React.forwardRef((_props, ref) => {
-  return <input type="text" name="text" id="text" ref={ref} />;
-});
+
 // class TextInput extends React.Component {
 //   render() {
 //     return (
 //       <div>
-//         <input type="text" name="text" id="text" />
+//         <input type="text" name="text" id="text" ref={forwardedRef} />
 //       </div>
 //     );
 //   }
 // }
+const TextInput = React.forwardRef((props, ref) => {
+  return (
+    <div>
+      <input type="text" name="text" id="text" ref={ref} {...props} />
+    </div>
+  );
+});
+TextInput.displayName =  "TextInput"
 function withLogProps(WrappedComponent) {
   class WithLogProps extends React.Component {
     constructor(props) {
@@ -26,13 +33,16 @@ function withLogProps(WrappedComponent) {
     render() {
       // 获取从高阶组件中传递来的
       const { forwardedRef, ...rest } = this.props;
-      // 将
+      // 通过替代属性传递ref
       return <WrappedComponent {...rest} ref={forwardedRef} />;
     }
   }
-  return React.forwardRef((props, ref) => {
+  const WithLogPropsForwardRef = React.forwardRef((props, ref) => {
     return <WithLogProps {...props} forwardedRef={ref} />;
   });
+  const name = WrappedComponent.displayName || WrappedComponent.name;
+  WithLogPropsForwardRef.displayName = `WithLogProps${name}`;
+  return WithLogPropsForwardRef;
 }
 
 const TextInputWithLogProps = withLogProps(TextInput);
