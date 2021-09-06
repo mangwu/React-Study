@@ -27,7 +27,7 @@ const beforeEach = (
 ) => {
   return callback;
 };
-// 3. 创建结束时
+// 3. 测试结束时删除包裹组件的div
 const afterEach = (
   callback = () => {
     document.body.removeChild(container);
@@ -37,13 +37,14 @@ const afterEach = (
   return callback;
 };
 
+// 4. 测试期望值
 const expect = (value) => {
   const toBe = (testValue) => {
     return value === testValue;
   };
   return { toBe };
 };
-
+// 5. 测试函数
 const it = (
   result = "can render and update a counter",
   callback = () => {
@@ -75,4 +76,5 @@ const it = (
 ) => {
   if (callback()) console.log(result);
 };
+// 6. 执行测试
 it();
