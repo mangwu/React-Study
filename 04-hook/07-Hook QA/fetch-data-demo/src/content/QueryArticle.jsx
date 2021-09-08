@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import "./QueryArticle.css";
 export default function QueryArticle() {
   const [data, setData] = useState(null);
   const [query, setQuery] = useState("");
   // const [search, setSearch] = useState("");
   const [url, setUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (url) {
@@ -15,8 +16,10 @@ export default function QueryArticle() {
     }
   }, [url]);
   const searchArticle = async (url) => {
+    setIsLoading(true);
     const results = await axios(url);
     setData(results.data);
+    setIsLoading(false);
     console.log(results);
   };
   const handleQueryInputChange = (e) => {
@@ -24,7 +27,7 @@ export default function QueryArticle() {
     setQuery(e.target.value);
   };
   return (
-    <div>
+    <div className="query-article">
       <div>
         <input type="search" value={query} onChange={handleQueryInputChange} />
         <button
@@ -36,20 +39,24 @@ export default function QueryArticle() {
           search
         </button>
       </div>
-      <ol>
-        {data &&
-          data.hits.map((item) => {
-            return (
-              <li key={item.objectID}>
-                <a href={item.url} target="_blank" rel="noreferrer">
-                  {item.title}
-                </a>
-                <span style={{ color: "red" }}>&nbsp;{item.author}</span>
-                &nbsp;{new Date(item.created_at).toLocaleString()}
-              </li>
-            );
-          })}
-      </ol>
+      {isLoading ? (
+        "loading..."
+      ) : (
+        <ol>
+          {data &&
+            data.hits.map((item) => {
+              return (
+                <li key={item.objectID}>
+                  <a href={item.url} target="_blank" rel="noreferrer">
+                    {item.title}
+                  </a>
+                  <span style={{ color: "red" }}>&nbsp;{item.author}</span>
+                  &nbsp;{new Date(item.created_at).toLocaleString()}
+                </li>
+              );
+            })}
+        </ol>
+      )}
     </div>
   );
 }

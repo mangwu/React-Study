@@ -1,0 +1,11 @@
+.App {
+  position: relative;
+  height: 900px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+ol {
+  margin: 0;
+  /* padding: 0; */
+}
