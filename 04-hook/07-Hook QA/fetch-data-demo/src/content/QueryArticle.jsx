@@ -1,12 +1,22 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./QueryArticle.css";
-export default function QueryArticle() {
+/**
+ * @description 如何使用Hooks获取数据的demo项目--检索文章组件
+ * @version 1.0
+ * @module QueryArticle
+ * @author wangzhihao
+ * @param {Object} _props
+ * @returns {JSXElement}
+ * @exports module:QueryArticle
+ */
+export default function QueryArticle(_props) {
   const [data, setData] = useState(null);
   const [query, setQuery] = useState("");
   // const [search, setSearch] = useState("");
   const [url, setUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     if (url) {
@@ -15,21 +25,34 @@ export default function QueryArticle() {
       setData(null);
     }
   }, [url]);
+  /**
+   * @description 异步获取第三方API数据 https://hn.algolia.com/api
+   * @async
+   * @param {string} url 第三方API地址
+   * @returns void
+   */
   const searchArticle = async (url) => {
+    setIsError(false);
     setIsLoading(true);
-    const results = await axios(url);
-    setData(results.data);
+    // 获取数据时可能引发错误
+    try {
+      const results = await axios(url);
+      setData(results.data);
+      console.log(results);
+    } catch (e) {
+      setIsError(true);
+    }
+
     setIsLoading(false);
-    console.log(results);
-  };
-  const handleQueryInputChange = (e) => {
-    console.log(e.target.value);
-    setQuery(e.target.value);
   };
   return (
     <div className="query-article">
       <div>
-        <input type="search" value={query} onChange={handleQueryInputChange} />
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
         <button
           disabled={query ? false : true}
           onClick={() =>
@@ -39,7 +62,9 @@ export default function QueryArticle() {
           search
         </button>
       </div>
-      {isLoading ? (
+      {isError ? (
+        <div>something went wrong...</div>
+      ) : isLoading ? (
         "loading..."
       ) : (
         <ol>
