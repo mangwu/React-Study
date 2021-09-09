@@ -48,19 +48,19 @@ export default function QueryArticle(_props) {
   return (
     <div className="query-article">
       <div>
-        <input
-          type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button
-          disabled={query ? false : true}
-          onClick={() =>
-            setUrl(`https://hn.algolia.com/api/v1/search?query=${query}`)
-          }
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            setUrl(`https://hn.algolia.com/api/v1/search?query=${query}`);
+          }}
         >
-          search
-        </button>
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <button disabled={query ? false : true}>search</button>
+        </form>
       </div>
       {isError ? (
         <div>something went wrong...</div>
