@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect, useReducer, useRef } from "react";
 import axios from "axios";
 
 /**
@@ -51,19 +51,30 @@ export default function useDataApiWithReducer() {
     isError: false,
     data: null,
   });
-  const getHackerNewsArticle = async (url) => {
+  // const didCancel = useRef(false);
+  const getHackerNewsArticle = async (url, didCancel) => {
     dispatch({ type: "FETCH_INIT" });
     try {
       const results = await axios(url);
-      dispatch({ type: "FETCH_SUCCESS", payload: results.data });
+      if (!didCancel) {
+        dispatch({ type: "FETCH_SUCCESS", payload: results.data });
+        console.log("FETCH_SUCCESS");
+      }
     } catch (e) {
-      dispatch({ type: "FETCH_FAILURE" });
+      if (!didCancel) {
+        dispatch({ type: "FETCH_FAILURE" });
+        console.log("FETCH_SUCCESS");
+      }
     }
   };
   useEffect(() => {
+    let didCancel = false;
     if (url) {
-      getHackerNewsArticle(url).then();
+      getHackerNewsArticle(url, didCancel).then();
     }
+    return () => {
+      didCancel = true;
+    };
   }, [url]);
   const { isLoading, isError, data } = state;
   return [{ isLoading, isError, data }, setUrl];
