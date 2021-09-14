@@ -23,9 +23,9 @@ ReactDOM.render(
   document.querySelector("#root")
 );
 /**
- * @description 使用ref hook测量DOM节点的例子
+ * @description 使用ref hook测量DOM节点的例子；ref hook无法获取到延迟显示的组件节点
  * @function MeasureDOMWithRefHookExp
- * @returns {object} 组件
+ * @returns {object} jsx元素
  */
 function MeasureDOMWithRefHookExp() {
   const [height, setHeight] = useState();
@@ -43,6 +43,11 @@ function MeasureDOMWithRefHookExp() {
     </div>
   );
 }
+/**
+ * @description 被延迟显示h2标签的子组件
+ * @param {object} props 通过解构获取到其中一个prop
+ * @returns {object} jsx元素
+ */
 function Child({ measureRef }) {
   const [isShow, setIsShow] = useState(false);
   const handleClick = () => {
@@ -55,3 +60,24 @@ function Child({ measureRef }) {
   );
 }
 ReactDOM.render(<MeasureDOMWithRefHookExp />, document.querySelector("#root2"));
+
+/**
+ * @description 使用回调ref可以获取到延迟显示组件节点引用的获取
+ * @function MeasureDOMWithCallbackRefExp2
+ * @returns {object} jsx元素
+ */
+function MeasureDOMWithCallbackRefExp2() {
+  const [height, setHeight] = useState();
+  const setDOMHeight = useCallback((node) => {
+    if (node !== null) {
+      setHeight(node.getBoundingClientRect().height);
+    }
+  });
+  return (
+    <div>
+      <Child measureRef={setDOMHeight} />
+      {height > 0 && <p>上面节点的高度为:{height}</p>}
+    </div>
+  );
+}
+ReactDOM.render(<MeasureDOMWithCallbackRefExp2 />, document.querySelector("#root3"));
