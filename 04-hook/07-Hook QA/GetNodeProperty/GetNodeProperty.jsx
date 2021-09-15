@@ -34,10 +34,12 @@ function MeasureDOMWithRefHookExp() {
     if (h2Ref.current) {
       setHeight(h2Ref.current.getBoundingClientRect().height);
     }
-    console.log(height);
+    console.log(h2Ref.current);
   });
   return (
     <div>
+      <hr />
+      <p>使用ref hook延迟显示组件的情况</p>
       <Child measureRef={h2Ref} />
       {height > 0 && <p>上面节点的高度为:{height}</p>}
     </div>
@@ -72,12 +74,17 @@ function MeasureDOMWithCallbackRefExp2() {
     if (node !== null) {
       setHeight(node.getBoundingClientRect().height);
     }
-  });
+  }, []);
   return (
     <div>
+      <hr />
+      <p>使用回调ref延迟显示组件的情况</p>
       <Child measureRef={setDOMHeight} />
       {height > 0 && <p>上面节点的高度为:{height}</p>}
     </div>
   );
 }
-ReactDOM.render(<MeasureDOMWithCallbackRefExp2 />, document.querySelector("#root3"));
+ReactDOM.render(
+  <MeasureDOMWithCallbackRefExp2 />,
+  document.querySelector("#root3")
+);
