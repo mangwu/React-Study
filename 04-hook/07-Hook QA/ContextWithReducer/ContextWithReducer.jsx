@@ -85,7 +85,7 @@ function Form() {
       payload: {
         id,
         book_name,
-        book_author,
+        author: book_author,
       },
     });
   };
