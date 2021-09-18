@@ -1,16 +1,17 @@
+const { useState } = window.React;
 /**
-* @description 错误边界
-* @class ErrorBoundary
-* @extends React.Component
-*/
+ * @description 错误边界
+ * @class ErrorBoundary
+ * @extends React.Component
+ */
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
     // 默认没有错误
     this.state = {
       hasError: false,
-      errorInfo: '',
-      error: '',
+      errorInfo: "",
+      error: "",
     };
   }
   // 用于渲染备用UI
@@ -63,10 +64,17 @@ function App() {
  */
 function Counter() {
   const [count, setCount] = useState(0);
+  if (count > 5) throw new Error("Counter component crashed");
   return (
     <div>
       <h2>count: {count}</h2>
-      <button onClick={() => setCount(count + 1)}>+</button>
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        +
+      </button>
     </div>
   );
 }
