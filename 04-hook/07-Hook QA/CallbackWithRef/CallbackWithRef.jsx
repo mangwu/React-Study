@@ -1,5 +1,5 @@
 const { useState, useCallback, useRef, useEffect } = window.React;
-
+const set = new Set();
 /**
  * @description 使用callback hook和ref hook 保证callback在在挂载时创建，并且能正确处理事件方法
  * @function CallbackWithRefExp
@@ -18,6 +18,7 @@ function CallbackWithRefExp() {
     },
     [textRef]
   );
+  set.add(handleSubmit);
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -31,6 +32,7 @@ function CallbackWithRefExp() {
         />
         <button type="submit">提交</button>
       </form>
+      <div>callback 被创建次数： {set.size}</div>
     </div>
   );
 }

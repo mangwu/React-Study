@@ -1,30 +1,51 @@
-const { useState, useEffect } = window.React;
+const { useState, useEffect, useRef } = window.React;
 /**
  * @description 使用React开发工具或者浏览器Performance查看React挂载渲染时的记录
  * @function App
  * @returns {object} jsx元素
  */
+
 function App() {
   const [date, setDate] = useState(new Date());
+  const [isStop, setIsStop] = useState(false);
+  const interval = useRef(null);
   const tick = () => {
     setDate(new Date());
   };
   useEffect(() => {
-    const interval = setInterval(() => {
-      tick();
-    }, 1000);
+    if (!isStop) {
+      interval.current = setInterval(() => {
+        tick();
+      }, 1000);
+    }
     return () => {
-      clearInterval(interval);
+      clearInterval(interval.current);
     };
-  }, []);
+  }, [isStop]);
+  const handleStopTime = () => {
+    setIsStop(!isStop);
+    if (isStop) {
+      setDate(new Date());
+    }
+  };
   return (
     <div>
       <h2>时钟表盘</h2>
       <ClockDial date={date} />
+      <Hello />
+      <button onClick={handleStopTime}>
+        {isStop ? "时间继续" : "时间停止"}
+      </button>
       <div>{date.toLocaleString()}</div>
     </div>
   );
 }
+/**
+ * @description 时钟表盘
+ * @function ClockDial
+ * @param {{Date}} date 时间
+ * @returns
+ */
 function ClockDial({ date }) {
   useEffect(() => {
     // 1.获取画布
@@ -145,5 +166,8 @@ function ClockDial({ date }) {
     cx.restore();
   }, [date]);
   return <canvas id="canvas" width="600px" height="600px"></canvas>;
+}
+function Hello() {
+  return <div>Hello, world</div>;
 }
 ReactDOM.render(<App />, document.querySelector("#root"));
