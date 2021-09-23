@@ -56,6 +56,60 @@ function StringProps({ message1, message2 }) {
   );
 }
 ReactDOM.render(
-  <StringProps message1="<hello world>" message2={'&lt;hello world>'} />,
+  <StringProps message1="<hello world>" message2={"&lt;hello world>"} />,
   document.querySelector("#root3")
 );
+
+/**
+ * @description 函数作为子元素
+ * @function FunctionAsChildEle
+ * @returns {object} jsx元素
+ */
+function FunctionAsChildEle() {
+  return (
+    <React.Fragment>
+      <h2>函数作为子元素</h2>
+      <Repeat num={10}>
+        {(index) => <div key={index}>This item is {index} in the list</div>}
+      </Repeat>
+    </React.Fragment>
+  );
+}
+function Repeat(props) {
+  const items = Array(props.num)
+    .fill(1)
+    .map((_v, i) => props.children(i));
+  return <React.Fragment>{items}</React.Fragment>;
+}
+ReactDOM.render(<FunctionAsChildEle />, document.querySelector("#root4"));
+
+const { useEffect, useState } = window.React;
+/**
+ * @description null undefined 布尔值等不会被渲染
+ * @function SpecialValues
+ * @returns {object} jsx元素
+ */
+function SpecialValues() {
+  const [res, setRes] = useState(null);
+  useEffect(() => {
+    // 异步设置data
+    setTimeout(() => {
+      setRes({ data: null });
+    }, 500);
+    // 异步设置list
+    setTimeout(() => {
+      setRes({
+        data: {
+          list: ["list"],
+        },
+      });
+    }, 1000);
+  }, []);
+  return (
+    <div>
+      <h2>null undefined 不予渲染</h2>
+      {res && res.data && res.data.list.map((v, i) => <div key={i}>{v}</div>)}
+    </div>
+  );
+}
+ReactDOM.render(<SpecialValues />, document.querySelector("#root5"));
