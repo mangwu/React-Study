@@ -28,6 +28,10 @@ function Mouse(props) {
     document.querySelector("#modal")
   );
 }
+// 类型检查
+// Mouse.propType = {
+//   render: PropType.func.isRequired,
+// };
 /**
  * @description 被渲染的组件
  * @function Children
@@ -38,7 +42,12 @@ function Children({ x, y }) {
     <img
       src="../gitlab_logo.png"
       alt="gitlabLogo"
-      style={{ position: "fixed", left: x, top: y, transform: "translate(-50%, -50%)" }}
+      style={{
+        position: "fixed",
+        left: x,
+        top: y,
+        transform: "translate(-50%, -50%)",
+      }}
     />
   );
 }
@@ -55,4 +64,20 @@ function MouseTracker() {
     </React.Fragment>
   );
 }
-ReactDOM.render(<MouseTracker />, document.querySelector("#root"));
+// ReactDOM.render(<MouseTracker />, document.querySelector("#root"));
+
+/**
+ * @description 通过render prop实现高阶函数
+ * @function withMouse
+ * @param {object} Component
+ * @returns {object} 组件
+ */
+function withMouse(Component) {
+  return class extends React.Component {
+    render() {
+      return <Mouse render={(x, y) => <Component x={x} y={y} />} />;
+    }
+  };
+}
+const TrackerWithMouse = withMouse(Children);
+ReactDOM.render(<TrackerWithMouse />, document.querySelector("#root"));
