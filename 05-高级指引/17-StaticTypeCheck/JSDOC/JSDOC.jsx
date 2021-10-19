@@ -12,15 +12,32 @@
  * @extends React.PureComponent
  */
 class JSDOCStaticTypeCheck extends React.PureComponent {
-
+  /**
+   * @description 构造函数
+   * @method constructor
+   * @param {object} props - 属性
+   * @returns void
+   */
+  constructor(props) {
+    super(props);
+    this.state = {
+      info: "使用JSDoc进行代码静态类型检查",
+    };
+  }
+  /**
+   * @description 渲染函数
+   * @method render
+   * @returns {React.ReactElement} react元素
+   */
+  render() {
+    return (
+      <div>
+        <h2>{this.state.info}</h2>
+      </div>
+    );
+  }
 }
 
-/**
- * @description test
- * @function Test
- * @param {object} props - 属性
- * @returns {React.ReactElement} react元素
- */
-function Test(props) {
-  // code
-}
+ReactDOM.render(<JSDOCStaticTypeCheck />, document.querySelector("#root"));
+
+
