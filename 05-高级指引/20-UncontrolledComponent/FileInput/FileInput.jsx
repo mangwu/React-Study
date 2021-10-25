@@ -17,6 +17,10 @@ function FileInputApp(_props) {
   const inputRef = useRef();
   // 文件信息
   const [fileInfo, setFileInfo] = useState(null);
+  /**
+   * @method handleSubmit 表单提交
+   * @param {Event} e 
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
     setFileInfo(inputRef.current.files[0]);
