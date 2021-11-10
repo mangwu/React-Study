@@ -40,13 +40,14 @@ class App extends React.Component {
   /**
    * @method addListItem
    */
-  addListItem() {
+  addListItem(e) {
+    e.preventDefault();
     this.setState((preState) => {
       return {
         lists: [
           ...preState.lists,
           {
-            id: preState.length,
+            id: preState.lists.length,
             text: preState.text,
             description: preState.description,
           }
@@ -61,7 +62,99 @@ class App extends React.Component {
    */
   render() {
     return (
-      <div></div>
-    ) 
+      <div>
+        <h2>使用派生state作为Memoization存储基于props计算出的数据：一种不推荐的方案</h2>
+        <form onSubmit={this.addListItem}>
+          <label htmlFor="title">标题: </label>
+          <input
+            type="text" name="title" id="title"
+            value={this.state.text}
+            onChange={(e) => this.setState({ text: e.target.value })}
+          />
+          <br />
+          <label htmlFor="description" >描述: </label>
+          <textarea name="description" id="description"
+            style={{ verticalAlign: "text-top" }}
+            cols="30" rows="10"
+            value={this.state.description}
+            onChange={(e) => this.setState({ description: e.target.value })}>
+          </textarea>
+          <br />
+          <input type="submit" value="提交" style={{ marginLeft: "300px" }} />
+          <ul>
+            {this.state.lists.map((item) => {
+              return (
+                <li key={item.id}>{item.text}</li>
+              )
+            })}
+          </ul>
+        </form>
+        <hr />
+        <FilterLists lists={this.state.lists} />
+      </div>
+    )
   }
 }
+/**
+ * @description 过滤子组件
+ * @class FilterLists
+ * @extends React.Component
+ */
+class FilterLists extends React.Component {
+  /**
+   * @description 构造函数
+   * @method constructor
+   * @param {object} props - 属性
+   * @returns void 
+   */
+  constructor(props) {
+    super(props);
+    this.state = {
+      filterText: "",
+      prevFilterText: "",
+      prevLists: props.lists,
+      filteredLists: props.lists,
+    };
+  }
+  static getDerivedStateFromProps(nextProps, preState) {
+    console.log(nextProps, preState);
+    // 列表变化或者过滤文本变化都需要重新渲染
+    // 需要存储上一个state中的过滤文本和上一个prop中的列表数据来检查变化
+    if (nextProps.lists !== preState.prevLists
+      || preState.filterText !== preState.prevFilterText) {
+      // 返回更新的数据
+      console.log({
+        prevLists: nextProps.lists,
+        prevFilterText: preState.filterText,
+        filteredLists: nextProps.lists.filter(item => item.text.includes(preState.filterText)),
+      });
+      return {
+        prevLists: nextProps.lists,
+        prevFilterText: preState.filterText,
+        filteredLists: nextProps.lists.filter(item => item.text.includes(preState.filterText)),
+      }
+    }
+    return null;
+  }
+  /**
+   * @description 渲染函数
+   * @method render
+   * @returns {React.ReactElement} react元素
+   */
+  render() {
+    return (
+      <div>
+        <label htmlFor="search">搜索框: </label>
+        <input type="search" name="search" id="search"
+          value={this.state.filterText}
+          onChange={(e) => this.setState({ filterText: e.target.value })} />
+        <ul>
+          {this.state.filteredLists.map((item) => {
+            return <li key={item.id}>{item.text}</li>
+          })}
+        </ul>
+      </div>
+    )
+  }
+}
+ReactDOM.render(<App />, document.querySelector("#root"));
