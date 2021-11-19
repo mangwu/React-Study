@@ -75,7 +75,7 @@ class Son extends React.Component {
     console.log(nextProps, this.props);
     console.log(nextState, this.state);
     if (this.state !== nextState || this.props !== nextProps) {
-      return false;
+      return true;
     }
     return false;
   }
