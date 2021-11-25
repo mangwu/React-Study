@@ -22,15 +22,26 @@ class CardContainer extends React.PureComponent {
     console.log(this.props.children);
     const nodes = React.Children.map(this.props.children, (item, index) => {
       return React.cloneElement(item, {
-        className:
-          item.props.className
-            ? item.props.className + " card-item " + item.props.slot
-            : "card-item " + item.props.slot,
+        className: item.props.className
+          ? item.props.className + " card-item " + item.props.slot
+          : "card-item " + item.props.slot,
         key: index,
       });
     });
     console.log(nodes);
-    return <div>{nodes}</div>;
+    return (
+      <div
+        style={{
+          width: "500px",
+          borderRadius: "8px",
+          background: "#eeeeee",
+          // padding: "8px 5px 25px 8px",
+          boxSizing: "border-box",
+        }}
+      >
+        {nodes}
+      </div>
+    );
   }
 }
 /**
