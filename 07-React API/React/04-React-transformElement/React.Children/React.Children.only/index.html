@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .badge {
+        display: inline-block;
+        box-sizing: border-box;
+        margin-right: 30px;
+        padding: 0;
+        color: #000000d9;
+        font-size: 14px;
+        font-variant: tabular-nums;
+        line-height: 1.5715;
+        list-style: none;
+        font-feature-settings: "tnum";
+        position: relative;
+        top: 10px;
+      }
+      .sub,
+      .avater {
+        width: 60px;
+        height: 60px;
+        border-radius: 5px;
+        background-color: #f0f0f0;
+      }
+      sup {
+        box-sizing: border-box;
+        padding: 0 8px;
+        transform: translate(50%, -50%);
+        vertical-align: baseline;
+        position: absolute;
+        min-width: 20px;
+        height: 20px;
+        text-align: center;
+        font-size: 12px;
+        right: 0px;
+        top: 0px;
+        border: 1px solid white;
+        border-radius: 10px;
+        color: white;
+        background-color: red;
+        box-shadow: 0 0 0 1px #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <!-- 加载JSXbabel包 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="./ReactChildrenOnly.jsx" type="text/babel"></script>
+  </body>
+</html>
