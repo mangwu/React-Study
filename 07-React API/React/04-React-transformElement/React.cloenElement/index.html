@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .divider {
+        display: flex;
+        width: 100%;
+        box-sizing: border-box;
+        white-space: nowrap;
+        color: #000;
+        font-size: 14px;
+        margin: 24px 0;
+        text-align: center;
+      }
+      .notext {
+        border-top: 1px solid rgba(161, 93, 93, 0.2);
+      }
+      .vertical {
+        display: inline-block;
+        border-top: none;
+        border-left: 1px solid rgba(0, 0, 0, 0.1);
+        margin: 0px;
+        min-height: 20px;
+        width: 2px;
+      }
+      .center::before {
+        position: relative;
+        top: 50%;
+        width: 50%;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        transform: translateY(50%);
+        content: "";
+      }
+      .center::after {
+        position: relative;
+        top: 50%;
+        width: 50%;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        transform: translateY(50%);
+        content: "";
+      }
+      .left::after {
+        position: relative;
+        top: 50%;
+        width: 95%;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        transform: translateY(50%);
+        content: "";
+      }
+      .left::before {
+        position: relative;
+        top: 50%;
+        width: 5%;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        transform: translateY(50%);
+        content: "";
+      }
+      .right::before {
+        position: relative;
+        top: 50%;
+        width: 95%;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        transform: translateY(50%);
+        content: "";
+      }
+      .right::after {
+        position: relative;
+        top: 50%;
+        width: 5%;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        transform: translateY(50%);
+        content: "";
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <!-- 加载JSXbabel包 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="./ReactCloneElement.jsx" type="text/babel"></script>
+  </body>
+</html>
