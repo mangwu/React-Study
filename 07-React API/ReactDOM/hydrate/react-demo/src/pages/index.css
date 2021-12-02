@@ -1,0 +1,6 @@
+.description {
+  list-style: none;
+}
+.description li {
+  border-bottom: 1px solid antiquewhite;
+}
