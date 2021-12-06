@@ -29,10 +29,10 @@ module.exports = {
         //   presets: ["@babel/react", "@babel/preset-env"],
         // },
       },
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"], // 从右到左执行，所以注意顺序
-      },
+      // {
+      //   test: /\.css$/,
+      //   use: ["style-loader", "css-loader"], // 从右到左执行，所以注意顺序
+      // },
     ],
   },
   plugins: [
