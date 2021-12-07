@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- checked属性展示 -->
+    <h2>HTML中的checked作为是否是默认选中项使用</h2>
+    <form>
+      <input type="checkbox" name="verhicle" id="bike" value="bike" checked />
+      bike <br /><input type="checkbox" name="vehicle" value="Car" />Car
+      <br /><input
+        type="checkbox"
+        name="vehicle"
+        value="bus"
+        checked="checked"
+      />Bus
+    </form>
+    <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <!-- 加载JSXbabel包 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="./Checked.jsx" type="text/babel"></script>
+  </body>
+</html>

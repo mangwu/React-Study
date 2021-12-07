@@ -7,6 +7,7 @@
  */
 import React, { useEffect, useState } from "react";
 import fetchData from "../helpers/fetchData";
+import proxyWindow from "../helpers/window";
 // import "./index.css";
 /**
  * @description Home
@@ -16,15 +17,30 @@ import fetchData from "../helpers/fetchData";
  */
 function Home(props) {
   const [posts, setPosts] = useState([]);
+  // if (proxyWindow && proxyWindow.__ROUTE_DATA__) {
+  //   this.setState({
+  //     post: proxyWindow.__ROUTE_DATA__,
+  //   });
+  //   console.log("删除data");
+  //   delete proxyWindow.__ROUTE_DATA__;
+  // } else {
+  //   fetchData().then((data) => {
+  //     console.log(data);
+  //     setPosts(data);
+  //   });
+  // }
+  // ssr渲染不会指向首次的渲染 didMount
   useEffect(() => {
     // 模拟数据获取
-    if (window.__ROUTE_DATA__) {
+    if (proxyWindow && proxyWindow.__ROUTE_DATA__) {
       this.setState({
-        post: window.__ROUTE_DATA__,
+        post: proxyWindow.__ROUTE_DATA__,
       });
-      delete window.__ROUTE_DATA__;
+      console.log("删除data");
+      delete proxyWindow.__ROUTE_DATA__;
     } else {
       fetchData().then((data) => {
+        console.log(data);
         setPosts(data);
       });
     }
