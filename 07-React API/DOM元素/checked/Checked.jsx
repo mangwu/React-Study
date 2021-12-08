@@ -61,7 +61,7 @@ class App extends React.PureComponent {
     return (
       <React.Fragment>
         <h2>
-          React的checked属性用作控制表单组件的属性，使用defaultChecked设置默认值
+          React的checked属性用作控制表单组件的属性，非可控组件，使用defaultChecked设置默认值
         </h2>
         <h4>多选框</h4>
         <form onSubmit={(e) => e.preventDefault()}>
@@ -114,6 +114,11 @@ class App extends React.PureComponent {
           />
           cherry
         </form>
+        <h4>非可控组件</h4>
+        <input type="radio" name="gender" id="female" defaultChecked value="female" />
+        女
+        <br />
+        <input type="radio" name="gender" id="male" value="male" />男
       </React.Fragment>
     );
   }
