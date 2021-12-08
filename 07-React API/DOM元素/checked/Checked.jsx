@@ -20,20 +20,37 @@ class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      bike: false,
-      car: false,
-      checked: false,
+      vehicle: [],
+      checkedValue: "",
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+    this.handleRadioChange = this.handleRadioChange.bind(this);
   }
-  handleChange(e) {
+  handleCheckboxChange(e) {
     const value = e.target.value;
-    if (value === "bike") {
-      this.setState({ bike: e.target.checked });
-    } else if (value === "car") {
-      this.setState({ car: e.target.checked });
+    const checked = this.state.vehicle.includes(value);
+    console.log(value, checked, e.target.checked);
+    // 存在就删除
+    if (checked) {
+      const newVehicle = this.state.vehicle.filter((item) => item !== value);
+      this.setState({
+        vehicle: newVehicle,
+      });
+    } else {
+      // 不存在就添加
+      this.setState((state) => {
+        return {
+          vehicle: [...state.vehicle, value],
+        };
+      });
     }
-    console.log(e.target.checked);
+  }
+  /**
+   * 单选框点击事件
+   * @param {Event} e 点击事件
+   */
+  handleRadioChange(e) {
+    this.setState({ checkedValue: e.target.value });
   }
   /**
    * @description 渲染函数
@@ -53,8 +70,8 @@ class App extends React.PureComponent {
             name="vehicle2"
             id="bike"
             value="bike"
-            checked={this.state.bike}
-            onChange={this.handleChange}
+            checked={this.state.vehicle.includes("bike")}
+            onChange={this.handleCheckboxChange}
           />
           bike <br />
           <input
@@ -62,15 +79,40 @@ class App extends React.PureComponent {
             name="vehicle2"
             id="car"
             value="car"
-            checked={this.state.car}
-            onChange={this.handleChange}
+            checked={this.state.vehicle.includes("car")}
+            onChange={this.handleCheckboxChange}
           />
           car
         </form>
         <h4>单选框</h4>
         <form onSubmit={(e) => e.preventDefault()}>
-          <input type="radio" name="fruits" id="apple" value="apple" checked={this.state.checked} onChange/>
-          <input type="radio" name="fruits" id="banana" value="banana" checked={this.state.checked} />
+          <input
+            type="radio"
+            name="fruits"
+            id="apple"
+            value="apple"
+            checked={this.state.checkedValue === "apple"}
+            onChange={this.handleRadioChange}
+          />
+          apple
+          <input
+            type="radio"
+            name="fruits"
+            id="banana"
+            value="banana"
+            checked={this.state.checkedValue === "banana"}
+            onChange={this.handleRadioChange}
+          />
+          banana
+          <input
+            type="radio"
+            name="fruits"
+            id="cherry"
+            value="cherry"
+            checked={this.state.checkedValue === "cherry"}
+            onChange={this.handleRadioChange}
+          />
+          cherry
         </form>
       </React.Fragment>
     );
