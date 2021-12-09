@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <h2>HTML中的value属性用做普通的值属性，初始化时赋予相应的值</h2>
+    <!-- <form> -->
+    <label for="fname">first name</label>
+    <input type="text" name="fname" id="fname" value="mang" /><br />
+    <label for="lname">last name</label>
+    <input type="text" name="lname" id="lname" value="wu" />
+    <input type="button" value="reset all" />
+    <!-- </form> -->
+    <script>
+      const reset = document.querySelector("input[type='button']");
+      const fname = document.querySelector("input[name='fname']");
+      const lname = document.querySelector("input[name='lname']");
+      const resetAll = () => {
+        fname.value = "";
+        lname.value = "";
+      };
+      // reset.addEventListener("click", function () {
+      //   fname.value = "";
+      //   lname.value = "";
+      // });
+      reset.onclick = resetAll;
+    </script>
+    <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <!-- 加载JSXbabel包 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="./value.jsx" type="text/babel"></script>
+  </body>
+</html>
