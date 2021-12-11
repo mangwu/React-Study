@@ -106,7 +106,5 @@ class App extends React.PureComponent {
     );
   }
 }
-function pasteImage(imgObj) {
-  const file = imgObj.getAsFile ? imgObj.getAsFile() : imgObj;
-}
+
 ReactDOM.render(<App />, document.querySelector("#root"));

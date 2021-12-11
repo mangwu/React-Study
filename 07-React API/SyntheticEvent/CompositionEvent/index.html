@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #log {
+        height: 200px;
+        width: 400px;
+        overflow-y: auto;
+        padding: 5px;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
+    <div>
+      <h4>HTML复合事件</h4>
+      <label for="test">记录合成输入时的事件</label>
+      <input type="text" name="test" id="test" />
+      <div id="log"></div>
+      <button id="clear">clear</button>
+    </div>
+    <script>
+      const log = document.querySelector("#log");
+      const test = document.querySelector("#test");
+      const height = log.scrollHeight;
+      test.addEventListener("compositionstart", (event) => {
+        log.innerHTML = log.innerHTML + `${event.type}: ${event.data}<br />`;
+        console.log(event);
+        log.scrollTop = log.scrollHeight - height;
+      });
+      test.addEventListener("compositionupdate", (event) => {
+        log.innerHTML = log.innerHTML + `${event.type}: ${event.data}<br />`;
+        // console.log(event);
+        log.scrollTop = log.scrollHeight - height;
+      });
+      test.addEventListener("compositionend", (event) => {
+        log.innerHTML = log.innerHTML + `${event.type}: ${event.data}<br />`;
+        log.scrollTop = log.scrollHeight - height;
+      });
+      const clear = document.querySelector("#clear");
+      clear.addEventListener("click", () => {
+        log.innerHTML = "";
+      });
+    </script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <!-- 加载JSXbabel包 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="./CompositionEvent.jsx" type="text/babel"></script>
+  </body>
+</html>
