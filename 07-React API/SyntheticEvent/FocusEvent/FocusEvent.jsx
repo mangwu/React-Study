@@ -48,14 +48,54 @@ function App(props) {
       />
       <form>
         <fieldset
-          onFocusCapture={(e) => (e.target.style.background = "gray")}
-          onBlurCapture={(e) => (e.target.style.background = "")}
+          onFocusCapture={(e) => {
+            e.target.style.background = "gray";
+            console.log(e);
+          }}
+          onBlurCapture={(e) => {
+            e.target.style.background = "";
+            console.log(e);
+          }}
         >
           <legend>使用focus的在捕获阶段注册统一处理的表单元素</legend>
           <input type="text" name="" id="" />
           <input type="text" name="" id="" />
         </fieldset>
       </form>
+      <div
+        tabIndex={1}
+        style={{ border: "1px solid black", width: 500, height: 50 }}
+        onFocus={(e) => {
+          console.log(e);
+          if (e.currentTarget === e.target) {
+            console.log("focused self");
+          } else {
+            console.log("focused child", e.target);
+          }
+          if (!e.currentTarget.contains(e.relatedTarget)) {
+            // Not triggered when swapping focus between children
+            console.log("focus entered self");
+          }
+          e.target.style.background = "red";
+        }}
+        onBlur={(e) => {
+          console.log(e);
+          if (e.currentTarget === e.target) {
+            console.log("unfocused self");
+          } else {
+            console.log("unfocused child", e.target);
+          }
+          if (!e.currentTarget.contains(e.relatedTarget)) {
+            // Not triggered when swapping focus between children
+            console.log("focus left self");
+          }
+          e.target.style.background = "";
+        }}
+      >
+        在父元素中注册焦点事件，来区分焦点事件触发来源
+        <input id="1" />
+        <input id="2" />
+      </div>
     </React.Fragment>
   );
 }
