@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OnInvalid</title>
+    <style>
+      .error {
+        color: red;
+        font-size: 12px;
+      }
+      .success {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <form class="form">
+      <fieldset>
+        <legend>onInvalid</legend>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          required
+          pattern="^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$"
+        />
+        <div class="error" hidden></div>
+        <div class="success" hidden>成功提交</div>
+        <br />
+        <button type="submit">提交</button>
+      </fieldset>
+    </form>
+    <script>
+      const error = document.querySelector(".error");
+      const success = document.querySelector(".success");
+      const email = document.querySelector("input[type='email']");
+      const submit = document.querySelector("button[type='submit']");
+      const form = document.querySelector(".form");
+      email.addEventListener("invalid", () => {
+        error.textContent = "输入的邮件地址不符合规范";
+        error.removeAttribute("hidden");
+        // setCustomValidity("请输入合法的邮件地址");
+      });
+      email.addEventListener("input", (e) => {
+        const reg =
+          /^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$/;
+        let valid = reg.test(email.value);
+        if (valid) {
+          error.setAttribute("hidden", "");
+        }
+        // } else {
+        //   error.textContent = "邮件地址不符合规范";
+        //   error.removeAttribute("hidden");
+        // }
+      });
+      form.addEventListener("submit", (e) => {
+        success.removeAttribute("hidden");
+        email.setAttribute("hidden", "");
+        submit.setAttribute("hidden", "");
+        e.preventDefault();
+      });
+    </script>
+    <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <!-- 加载JSXbabel包 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="./OnInvalid.jsx" type="text/babel"></script>
+  </body>
+</html>

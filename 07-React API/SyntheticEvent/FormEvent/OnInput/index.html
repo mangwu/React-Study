@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OnInput</title>
+    <style>
+      .html-input {
+        border: 1px solid black;
+        padding: 2px 5px;
+        line-height: 26px;
+      }
+      .design-mode {
+        border: 1px solid black;
+        margin-top: 30px;
+        padding: 3px 12px;
+        min-height: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <h2>HTML中的onInput处理contenteditable非表单元素</h2>
+    <div class="html-input">
+      <div class="edit-div" contenteditable="true">可编辑的</div>
+      <div class="display-div"></div>
+    </div>
+    <div class="design-mode">
+      <div class="designable" oninput="alert('123')">不可编辑区域</div>
+      <div class="display-div2"></div>
+    </div>
+
+    <script>
+      // document.designMode = "on";
+      const editdiv = document.querySelector(".edit-div");
+      const displaydiv = document.querySelector(".display-div");
+      editdiv.addEventListener("input", () => {
+        displaydiv.textContent = editdiv.textContent;
+      });
+      const designable = document.querySelector(".designable");
+      const displaydiv2 = document.querySelector(".display-div2");
+      // document.designMode = "on";
+      designable.addEventListener("input", () => {
+        console.log("123");
+        displaydiv2.textContent = designable.textContent;
+      });
+    </script>
+    <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <!-- 加载JSXbabel包 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="./OnInput.jsx" type="text/babel"></script>
+  </body>
+</html>
