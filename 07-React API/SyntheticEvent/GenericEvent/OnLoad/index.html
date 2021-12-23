@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>加载事件处理函数</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <h2>onload事件处理器</h2>
+    <img
+      src="https://joeschmoe.io/api/v1/random"
+      alt="随机头像"
+      width="80"
+      height="80"
+      class="normal"
+    />
+    <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <!-- 加载JSXbabel包 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <link
+      crossorigin="anonymous"
+      integrity="sha512-1cRepUcVLQSw+JkCyB4k0Yz27GcyMWF8YueVzE2JYj4t2SYMgK0l5GFIKQw5uKB9FWvytVGB/igSZah/JjmIfw=="
+      href="https://lib.baomitu.com/antd/4.17.0-alpha.3/antd.compact.css"
+      rel="stylesheet"
+    />
+    <script
+      type="module"
+      crossorigin="anonymous"
+      src="https://lib.baomitu.com/antd/4.17.0-alpha.3/antd-with-locales.js"
+      integrity="sha512-mNRzG/3TZDWsNwFfB9z+4SrMfWr0yPOcWV3jz9SYACY8ITC4jMp53AATgj50PFZupyOJOYNkC1MYI0fZoSBo4g=="
+    ></script>
+    <script src="./OnLoad.js"></script>
+    <script src="./OnLoad.jsx" type="text/babel"></script>
+  </body>
+</html>

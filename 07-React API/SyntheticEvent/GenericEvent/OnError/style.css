@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+  min-height: 100%;
+  /* min-width: 1200px; */
+}
+body {
+  position: relative;
+  font: 14px/1.5 "Microsoft YaHei", sans-serif;
+  min-height: 100%;
+  background: #ebecee;
+}
+#log {
+  position: absolute;
+  bottom: 0;
+  height: 50%;
+  width: 100%;
+  padding: 20px;
+  background: white;
+  box-shadow: 2px 0 5px 5px rgb(221, 219, 219);
+}
+ol {
+  /* width: 90%; */
+  /* overflow: hidden; */
+  padding-left: 30px;
+  font-size: 18px;
+}
