@@ -15,7 +15,9 @@
 const clickme = document.querySelector(".clickme");
 const ul = document.querySelector("ul");
 console.log(ul);
-clickme.addEventListener("click", (e) => {
+// 测试鼠标全部按键时，使用鼠标事件mouseup
+// 测试鼠标位置时，使用mousemove
+clickme.addEventListener("mouseup", (e) => {
   console.log(e);
   const li = document.createElement("li");
   const {
@@ -40,13 +42,13 @@ clickme.addEventListener("click", (e) => {
   li.innerHTML = `<table>
     <tr>
       <th>属性</th>
-      <td>button:</td>
-      <td>altKey:</td>
-      <td>buttons:</td>
-      <td>clientX:</td>
-      <td>clientY:</td>
-      <td>ctrlKey:</td>
-      <td>metaKey:</td>
+      <td>button</td>
+      <td>altKey</td>
+      <td>buttons</td>
+      <td>clientX</td>
+      <td>clientY</td>
+      <td>ctrlKey</td>
+      <td>metaKey</td>
     </tr>
     <tr>
       <th>值</th>
@@ -59,15 +61,37 @@ clickme.addEventListener("click", (e) => {
       <td>${metaKey}</td>
     </tr>
     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
+      <th>属性</th>
+      <td>movementX</td>
+      <td>movementY</td>
+      <td>offsetX</td>
+      <td>offsetY</td>
+      <td>pageX</td>
+      <td>pageY</td>
+      <td>screenX</td>
     </tr>
-    ${button};\t${altKey};\t${buttons};<br/>
-    ${clientX};\t${clientY};\t${ctrlKey};<br/>
-    :${metaKey};\tmovementX:${movementX};\tmovementY:${movementY};<br/>
-    offsetX:${offsetX};\toffsetY:${offsetY};\tpageX:${pageX};\tpageY:${pageY};<br/>
-    screenX:${screenX};\tscreenY:${screenY};\tregion:${region};\tshiftKey:${shiftKey};<br/>
+    <tr>
+      <th>值</th>
+      <td>${movementX}</td>
+      <td>${movementY}</td>
+      <td>${offsetX}</td>
+      <td>${offsetY}</td>
+      <td>${pageX}</td>
+      <td>${pageY}</td>
+      <td>${screenX}</td>
+    </tr>
+    <tr>
+      <th>属性</th>
+      <td>screenY:</td>
+      <td>region:</td>
+      <td>shiftKey:</td>
+    </tr>
+    <tr>
+      <th>值</th>
+      <td>${screenY}</td>
+      <td>${region}</td>
+      <td>${shiftKey}</td>
+    </tr>
     </table>
     `;
   ul.append(li);
