@@ -2,7 +2,7 @@
  * @Author: mangwu                                                             *
  * @File: MouseEventRegion.js                                                  *
  * @Date: 2022-01-05 09:31:55                                                  *
- * @LastModifiedDate: 2022-01-05 09:39:23                                      *
+ * @LastModifiedDate: 2022-01-05 11:21:18                                      *
  * @ModifiedBy: mangwu                                                         *
  * -----------------------                                                     *
  * Copyright (c) 2022 inspur                                                   *
@@ -21,7 +21,7 @@ ctx.arc(70, 80, 10, 0.2 * Math.PI, false);
 ctx.fill();
 
 // 被废弃的方法
-ctx.addHitRegion({ id: "circle" });
+// ctx.addHitRegion({ id: "circle" });
 
 const log = document.querySelector("#log");
 

@@ -2,11 +2,26 @@ body {
   font-family: "微软雅黑";
   margin: 0;
 }
+.grandfather {
+  position: relative;
+  border: 3px solid black;
+}
+.father {
+  position: relative;
+  height: 400px;
+  width: 400px;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: antiquewhite;
+  line-height: 400px;
+}
 .clickme {
+  position: relative;
   box-sizing: border-box;
   color: seagreen;
   height: 200px;
   width: 200px;
+  margin-left: 100px;
   text-align: center;
   line-height: 200px;
   border: 5px solid black;
@@ -16,6 +31,7 @@ body {
   padding: 0px;
   /*border: none;*/
   overflow: scroll;
+  vertical-align: middle;
 }
 .hi {
   height: 300px;

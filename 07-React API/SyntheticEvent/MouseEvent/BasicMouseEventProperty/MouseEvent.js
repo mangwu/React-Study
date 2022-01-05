@@ -2,7 +2,7 @@
  * @Author: mangwu                                                             *
  * @File: MouseEvent.js                                                        *
  * @Date: 2021-12-31 11:10:36                                                  *
- * @LastModifiedDate: 2022-01-05 09:47:36                                      *
+ * @LastModifiedDate: 2022-01-05 14:45:01                                      *
  * @ModifiedBy: mangwu                                                         *
  * -----------------------                                                     *
  * Copyright (c) 2021 inspur                                                   *
@@ -18,7 +18,7 @@ console.log(ul);
 // 测试鼠标全部按键时，使用鼠标事件mouseup
 // 测试鼠标位置时，使用mousemove
 // 测试鼠标的相关对象，使用mouseleave或mouseenter
-clickme.addEventListener("mouseenter", (e) => {
+clickme.addEventListener("mouseup", (e) => {
   console.log(e);
   const li = document.createElement("li");
   const {
@@ -37,10 +37,12 @@ clickme.addEventListener("mouseenter", (e) => {
     pageY,
     screenX,
     screenY,
-    region,
+    // region,
     shiftKey,
     x,
     y,
+    layerX,
+    layerY,
     relatedTarget
   } = e;
   li.innerHTML = `<table>
@@ -87,20 +89,22 @@ clickme.addEventListener("mouseenter", (e) => {
     <tr>
       <th>属性</th>
       <td>screenY:</td>
-      <td>region:</td>
       <td>shiftKey:</td>
       <td>x</td>
       <td>y</td>
       <td>relatedTarget</td>
+      <td>layerX</td>
+      <td>layerY</td>
     </tr>
     <tr>
       <th>值</th>
       <td>${screenY}</td>
-      <td>${region}</td>
       <td>${shiftKey}</td>
       <td>${x}</td>
       <td>${y}</td>
       <td>${relatedTarget}</td>
+      <td>${layerX}</td>
+      <td>${layerY}</td>
     </tr>
     </table>
     `;
