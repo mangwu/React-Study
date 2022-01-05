@@ -4,19 +4,17 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>鼠标事件</title>
+    <title>鼠标事件属性relatedTarget</title>
     <style>
       @import url(./style.css);
     </style>
   </head>
-  <body>
-    <h2>鼠标事件</h2>
-    <button class="clickme" id="clickme">click me
-      <span class="hi"></span>
-    </button>
-    <div class="scroll">很长的一段</div>
+  <body id="body">
+    <div id="root">
+      <div class="blue" id="blue" tabindex="1"></div>
+      <div class="red" id="red" tabindex="2"></div>
+    </div>
     <ul id="log"></ul>
-    <div class="scrollY">很长的一段</div>
+    <script src="./MouseEventRelatedTarget.js"></script>
   </body>
-  <script src="./MouseEvent.js"></script>
 </html>

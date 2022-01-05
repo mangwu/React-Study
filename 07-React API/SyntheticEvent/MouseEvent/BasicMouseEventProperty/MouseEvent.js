@@ -2,7 +2,7 @@
  * @Author: mangwu                                                             *
  * @File: MouseEvent.js                                                        *
  * @Date: 2021-12-31 11:10:36                                                  *
- * @LastModifiedDate: 2021-12-31 17:35:55                                      *
+ * @LastModifiedDate: 2022-01-05 09:47:36                                      *
  * @ModifiedBy: mangwu                                                         *
  * -----------------------                                                     *
  * Copyright (c) 2021 inspur                                                   *
@@ -17,7 +17,8 @@ const ul = document.querySelector("ul");
 console.log(ul);
 // 测试鼠标全部按键时，使用鼠标事件mouseup
 // 测试鼠标位置时，使用mousemove
-clickme.addEventListener("mouseup", (e) => {
+// 测试鼠标的相关对象，使用mouseleave或mouseenter
+clickme.addEventListener("mouseenter", (e) => {
   console.log(e);
   const li = document.createElement("li");
   const {
@@ -38,6 +39,9 @@ clickme.addEventListener("mouseup", (e) => {
     screenY,
     region,
     shiftKey,
+    x,
+    y,
+    relatedTarget
   } = e;
   li.innerHTML = `<table>
     <tr>
@@ -85,12 +89,18 @@ clickme.addEventListener("mouseup", (e) => {
       <td>screenY:</td>
       <td>region:</td>
       <td>shiftKey:</td>
+      <td>x</td>
+      <td>y</td>
+      <td>relatedTarget</td>
     </tr>
     <tr>
       <th>值</th>
       <td>${screenY}</td>
       <td>${region}</td>
       <td>${shiftKey}</td>
+      <td>${x}</td>
+      <td>${y}</td>
+      <td>${relatedTarget}</td>
     </tr>
     </table>
     `;
