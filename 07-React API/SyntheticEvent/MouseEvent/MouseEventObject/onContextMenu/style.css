@@ -1,0 +1,16 @@
+.alert-node {
+  position: absolute;
+}
+.clickme {
+  width: 400px;
+  height: 400px;
+  font-size: 22px;
+  text-align: center;
+  font-weight: 600;
+  background-color: antiquewhite;
+  line-height: 400px;
+  cursor: pointer;
+}
+.ant-alert.ant-alert-info {
+  font-size: 20px;
+}
