@@ -1,0 +1,26 @@
+.normal {
+  /* 文本不可选中 */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color: antiquewhite;
+  display: inline-block;
+  /* 元素基点 */
+  transform-origin: 0 0;
+  transition: transform cubic-bezier(0.075, 0.82, 0.165, 1) 1.6s;
+  cursor: pointer;
+}
+.title {
+  font-weight: 600;
+  font-size: 25px;
+}
+p {
+  font-size: 18px;
+}
+.large {
+  transform: scale(2);
+}
