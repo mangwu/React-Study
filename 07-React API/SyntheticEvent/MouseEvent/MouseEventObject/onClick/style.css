@@ -1,0 +1,8 @@
+.clickme {
+  width: 200px;
+  height: 200px;
+  background-color: antiquewhite;
+  cursor: pointer;
+  line-height: 200px;
+  text-align: center;
+}
