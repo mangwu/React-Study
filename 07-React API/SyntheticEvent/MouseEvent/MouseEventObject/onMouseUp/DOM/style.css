@@ -1,0 +1,6 @@
+#canvas {
+  border: 1px solid black;
+  cursor: crosshair;
+  width: 560px;
+  height: 400px;
+}
