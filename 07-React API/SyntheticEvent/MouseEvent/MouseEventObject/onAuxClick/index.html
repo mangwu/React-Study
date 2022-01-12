@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AuxClick</title>
+    <style>
+      .clickme {
+        width: 1000px;
+        height: 200px;
+        line-height: 200px;
+        font-size: 28px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+
+    </div>
+    <div id="dom">
+      <h2>DOM中的auclick</h2>
+      <div class="clickme">use different mouse key click me</div>
+    </div>
+    <script src="./auxclick.js"></script>
+    <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <!-- 加载JSXbabel包 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="./onAuClick.jsx" type="text/babel"></script>
+  </body>
+</html>
