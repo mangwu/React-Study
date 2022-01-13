@@ -2,7 +2,7 @@
  * @Author: mangwu                                                             *
  * @File: auxclick.js                                                          *
  * @Date: 2022-01-12 14:36:01                                                  *
- * @LastModifiedDate: 2022-01-13 09:48:35                                      *
+ * @LastModifiedDate: 2022-01-13 10:20:26                                      *
  * @ModifiedBy: mangwu                                                         *
  * -----------------------                                                     *
  * Copyright (c) 2022                                                          *
@@ -10,6 +10,7 @@
  * @HISTORY:                                                                   *
  * Date   	            By 	    Comments                                       *
  * ---------------------	--------	----------------------------------------------- *
+ * 2022-01-13 10:19:24	mangwu	$0auxclick可以阻止link跳转默认行为，滚动需要和弹出菜单栏需要mousedown和contextmenu阻止
  */
 
 // 鼠标中键（非主按钮）点击时触发
