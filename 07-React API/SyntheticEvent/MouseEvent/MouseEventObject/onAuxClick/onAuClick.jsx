@@ -21,8 +21,9 @@ class App extends React.PureComponent {
     super(props);
     this.state = {
       color: "black",
-      backgroudColor: "#ffffff",
+      backgroundColor: "#ffffff",
     };
+    this.clickmeRef = React.createRef(null);
   }
   // 返回随机
   randomColor() {
@@ -35,7 +36,37 @@ class App extends React.PureComponent {
     return (
       <React.Fragment>
         <h2>React中的auxclick</h2>
-        <div className="clickme">use different mouse key click me</div>
+        <div
+          style={{
+            color: this.state.color,
+            backgroundColor: this.state.backgroundColor,
+          }}
+          className="clickme"
+          ref={this.clickmeRef}
+          onAuxClick={(e) => {
+            e.preventDefault();
+            this.setState({
+              color: this.randomColor(),
+            });
+          }}
+          onContextMenu={(e) => {
+            e.preventDefault();
+          }}
+          onMouseDown={(e) => {
+            if (e.button === 1) {
+              // 阻止中键默认行为
+              e.preventDefault();
+            }
+          }}
+          onClick={(e) => {
+            e.preventDefault();
+            this.setState({
+              backgroundColor: this.randomColor(),
+            });
+          }}
+        >
+          use different mouse key click me
+        </div>
       </React.Fragment>
     );
   }

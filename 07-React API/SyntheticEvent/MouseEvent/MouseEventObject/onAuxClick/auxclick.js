@@ -2,7 +2,7 @@
  * @Author: mangwu                                                             *
  * @File: auxclick.js                                                          *
  * @Date: 2022-01-12 14:36:01                                                  *
- * @LastModifiedDate: 2022-01-12 20:08:10                                      *
+ * @LastModifiedDate: 2022-01-13 09:48:35                                      *
  * @ModifiedBy: mangwu                                                         *
  * -----------------------                                                     *
  * Copyright (c) 2022                                                          *
@@ -31,13 +31,7 @@ clickme.addEventListener("auxclick", (e) => {
 });
 clickme.addEventListener("mousedown", (e) => {
   // 鼠标中键按下
-  if (e.button === 2) {
-    e.preventDefault();
-  }
-})
-clickme.addEventListener("mouseup", (e) => {
-  // 鼠标中键按下
-  if (e.button === 2) {
+  if (e.button === 1) {
     e.preventDefault();
   }
 })
