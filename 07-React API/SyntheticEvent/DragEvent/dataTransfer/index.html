@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>拖放事件</title>
+    <style>
+      .wrapper {
+        height: 120px;
+        width: 120px;
+        /* line-height: 120px; */
+        background-color: antiquewhite;
+        border: 1px solid black;
+      }
+      .box {
+        height: 50px;
+        width: 50px;
+        text-align: center;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>DOM中的拖放（drag and drop）事件</h2>
+    <div class="wrapper">
+      <div class="box" draggable="true">Hello</div>
+      <a href="http://baidu.com" draggable="true" target="_blank" rel="noopener noreferrer">baidu</a>
+    </div>
+    <div class="datatransfer"></div>
+    <script src="./DND.js"></script>
+    <div id="root"></div>
+    <!-- 部署时将开发模式的development.js换为生产模式的production.min.js-->
+    <script
+    crossorigin
+    src='https://unpkg.com/react@17/umd/react.development.js'
+    ></script>
+    <script
+    crossorigin
+    src='https://unpkg.com/react-dom@17/umd/react-dom.development.js'
+    ></script>
+    <!-- 加载JSXbabel包 -->
+    <script src='https://unpkg.com/babel-standalone@6/babel.min.js'></script>
+    <script src='./DND.jsx' type='text/babel'></script>
+    
+  </body>
+</html>
